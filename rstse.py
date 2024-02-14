@@ -249,13 +249,13 @@ for user_id, similarities in sorted_similar_users.items():
     df_data['Similar_User'].append(similar_user)
     df_data['Time_Decayed_Similarity'].append(time_decayed_similarities[user_id][similar_user])
 
-df = pd.DataFrame(df_data)
-df = df.groupby('User_ID').agg({
+df_data = pd.DataFrame(df_data)
+df_data = df_data.groupby('User_ID').agg({
     'Similar_User': 'unique',
     'Time_Decayed_Similarity': 'unique'
 }).reset_index()
-df = df.rename(columns={'User_ID':'uid1', 'Similar_User': 'similar_users', 'Time_Decayed_Similarity': 'time_decayed_similarity'})
-df.to_csv('RSTSE_V_similar_user.csv', index=False)
+df_data = df_data.rename(columns={'User_ID':'uid1', 'Similar_User': 'similar_users', 'Time_Decayed_Similarity': 'time_decayed_similarity'})
+df_data.to_csv('RSTSE_V_similar_user.csv', index=False)
 
 
 checkins_data= pd.DataFrame(checkins_data)
