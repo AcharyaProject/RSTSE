@@ -261,6 +261,7 @@ df_data.to_csv('RSTSE_V_similar_user.csv', index=False)
 checkins_data= pd.DataFrame(checkins_data)
 grouped_df4 = checkins_data.groupby('uid1').agg({'poi-id': lambda x: list(x), 'freq': lambda x: list(x)}).reset_index()
 grouped_df4.columns = ['uid1', 'grouped_poi_ids', 'Grouped_Frequencies']
+merged_df = pd.merge(df_data, grouped_df4, on='uid1')
 
 def recommend_pois(row):
     similar_users = row['similar_users']
@@ -285,10 +286,10 @@ def recommend_pois(row):
 
     return recommended_pois
 
-df_data['Recommended_POIs'] = df_data.apply(recommend_pois, axis=1)
-df_data[['uid1', 'similar_users', 'time_decayed_similarity', 'Recommended_POIs']]
+merged_df['Recommended_POIs'] = merged_df.apply(recommend_pois, axis=1)
+merged_df[['uid1', 'similar_users', 'time_decayed_similarity', 'Recommended_POIs']]
 output_file= 'spatial_cooccurences_top_10.csv'
-df_data[['uid1', 'similar_users', 'time_decayed_similarity', 'grouped_poi_ids', 'Recommended_POIs']].to_csv(output_file, index=False)
+merged_df[['uid1', 'similar_users', 'time_decayed_similarity', 'grouped_poi_ids', 'Recommended_POIs']].to_csv(output_file, index=False)
 
 """**RSTSE-Trans**"""
 
