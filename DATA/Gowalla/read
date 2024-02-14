@@ -1,0 +1,1 @@
+"""Gowalla preporcessed data with 70 percent of earlier record taken as training , 20 percent as testing data and remaining as validation set."""
