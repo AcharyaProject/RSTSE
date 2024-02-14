@@ -257,7 +257,6 @@ df_data = df_data.groupby('User_ID').agg({
 df_data = df_data.rename(columns={'User_ID':'uid1', 'Similar_User': 'similar_users', 'Time_Decayed_Similarity': 'time_decayed_similarity'})
 df_data.to_csv('RSTSE_V_similar_user.csv', index=False)
 
-
 checkins_data= pd.DataFrame(checkins_data)
 grouped_df4 = checkins_data.groupby('uid1').agg({'poi-id': lambda x: list(x), 'freq': lambda x: list(x)}).reset_index()
 grouped_df4.columns = ['uid1', 'grouped_poi_ids', 'Grouped_Frequencies']
